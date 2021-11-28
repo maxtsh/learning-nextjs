@@ -5,4 +5,5 @@ export interface DataType {
   date: string;
   image: string;
   isFeatured: boolean;
+  description: string;
 }

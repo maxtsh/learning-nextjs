@@ -11,6 +11,7 @@ body {
   padding: 0;
   background-color: #CAFAFE;
   font-size: 16px;
+  font-family: Tahoma;
 }
 
 h1,

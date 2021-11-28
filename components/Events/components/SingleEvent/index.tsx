@@ -1,6 +1,7 @@
 import { Container } from "./styles";
 import Link from "next/link";
 import { MdOutlineDateRange, MdLocationOn } from "react-icons/md";
+import { BsArrowRight } from "react-icons/bs";
 import { DataType } from "../../types";
 
 interface SingleEventProps {
@@ -32,7 +33,8 @@ const SingleEvent: React.FC<SingleEventProps> = ({ data }) => {
           <h3 className="info-address-address">{data.address}</h3>
         </div>
         <div className="info-button">
-          <Link href={`/events/${data.id}`}>Explore event </Link>
+          <Link href={`/events/${data.id}`}>Explore event</Link>
+          <BsArrowRight className="info-button-icon" color="#fff" size={20} />
         </div>
       </div>
     </Container>

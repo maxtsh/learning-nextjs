@@ -74,17 +74,25 @@ export const Container = styled.div`
       position: absolute;
       bottom: 30px;
       right: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      font-weight: 400;
+      font-size: 100%;
+      padding: 0.65rem 1.5rem;
+      box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+      background-color: #1ba39c;
+      border-radius: 4px;
+      cursor: pointer;
+
+      &-icon {
+        margin-left: 0.5rem;
+      }
 
       a {
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        font-weight: 400;
-        font-size: 100%;
-        padding: 0.65rem 1.5rem;
-        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-        text-decoration: none;
         color: #fff;
-        background-color: #1ba39c;
-        border-radius: 4px;
+        text-decoration: none;
       }
     }
   }
