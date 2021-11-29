@@ -3,15 +3,15 @@ import { Form } from "./styles";
 const Search = () => {
   return (
     <Form>
-      <div>
-        <div>
+      <div className="form-controls">
+        <div className="form-control">
           <label htmlFor="year">Year</label>
           <select id="year">
             <option value={2021}>2021</option>
             <option value={2020}>2020</option>
           </select>
         </div>
-        <div>
+        <div className="form-control">
           <label htmlFor="month">Month</label>
           <select id="month">
             <option value={1}>Jan</option>
@@ -29,7 +29,7 @@ const Search = () => {
           </select>
         </div>
       </div>
-      <button>Find events</button>
+      <button className="form-button">Find events</button>
     </Form>
   );
 };

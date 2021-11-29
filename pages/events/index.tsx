@@ -8,7 +8,6 @@ interface EventsProps {
 const Events: NextPage<EventsProps> = ({ showFeaturedOnly }) => {
   return (
     <div className="container">
-      <h1>All Events</h1>
       <EventList showFeaturedOnly={showFeaturedOnly} />
     </div>
   );
