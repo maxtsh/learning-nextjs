@@ -1,19 +1,40 @@
+import { useRef } from "react";
 import { Form } from "./styles";
 
-const Search = () => {
+interface SearchProps {
+  onSearch: (y: string, m: string) => void;
+}
+
+const Search: React.FC<SearchProps> = ({ onSearch }) => {
+  const yearRef = useRef<HTMLSelectElement>(null);
+  const monthRef = useRef<HTMLSelectElement>(null);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
+
+    if (yearRef.current && monthRef.current) {
+      const year = yearRef.current.value;
+      const month = monthRef.current.value;
+
+      onSearch(year, month);
+    }
+  };
+
   return (
-    <Form>
+    <Form onSubmit={handleSubmit}>
       <div className="form-controls">
         <div className="form-control">
           <label htmlFor="year">Year</label>
-          <select id="year">
+          <select ref={yearRef} id="year">
+            <option value={2023}>2023</option>
+            <option value={2022}>2022</option>
             <option value={2021}>2021</option>
             <option value={2020}>2020</option>
           </select>
         </div>
         <div className="form-control">
           <label htmlFor="month">Month</label>
-          <select id="month">
+          <select ref={monthRef} defaultValue={1} id="month">
             <option value={1}>Jan</option>
             <option value={2}>Feb</option>
             <option value={3}>Mar</option>
@@ -29,7 +50,9 @@ const Search = () => {
           </select>
         </div>
       </div>
-      <button className="form-button">Find events</button>
+      <button type="submit" className="form-button">
+        Find events
+      </button>
     </Form>
   );
 };
