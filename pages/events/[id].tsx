@@ -1,17 +1,18 @@
-import type { NextPage } from "next";
-import { useRouter, NextRouter } from "next/router";
+import type {
+  GetStaticPropsContext,
+  GetStaticPropsResult,
+  NextPage,
+} from "next";
 import { BsFillCalendarFill } from "react-icons/bs";
 import { IoLocationSharp } from "react-icons/io5";
 import { Container } from "../../styles/event/styles";
-import { DataType } from "../../components/Events/types";
-import Data from "../../Store/Data";
+import API from "../../api";
+import type { EventType } from "../../Types/Events";
+interface EventProps {
+  event: EventType;
+}
 
-const Event: NextPage = () => {
-  const { query }: NextRouter = useRouter();
-  const event: DataType | undefined = Data.find(
-    (d: DataType) => d.id === Number(query.id)
-  );
-
+const Event: NextPage<EventProps> = ({ event }) => {
   if (event) {
     return (
       <Container>
@@ -43,6 +44,43 @@ const Event: NextPage = () => {
       </h1>
     );
   }
+};
+
+export const getStaticProps = async (
+  context: GetStaticPropsContext
+): Promise<GetStaticPropsResult<EventProps>> => {
+  const { params } = context;
+  const eventId = Number(params?.id) + 1;
+  const url = `https://nextjs-training-1-default-rtdb.europe-west1.firebasedatabase.app/events/e${eventId}.json`;
+  const { data, status } = await API({ url, method: "GET" });
+
+  if (status !== 200) {
+    return {
+      notFound: true,
+    };
+  }
+  return {
+    props: { event: data },
+    revalidate: 30,
+  };
+};
+
+export const getStaticPaths = async () => {
+  const url =
+    "https://nextjs-training-1-default-rtdb.europe-west1.firebasedatabase.app/events.json";
+
+  const { data, status } = await API({ url, method: "GET" });
+  const ids: number[] = Object.values(data).map((v: any) => v.id);
+
+  if (status !== 200) {
+    return {
+      notFound: true,
+    };
+  }
+  return {
+    paths: ids.map((id: number) => ({ params: { id: `${id}` } })),
+    fallback: false,
+  };
 };
 
 export default Event;

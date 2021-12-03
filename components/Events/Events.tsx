@@ -2,15 +2,15 @@ import { useRouter } from "next/router";
 import SingleEvent from "./components/SingleEvent";
 import Search from "../Search";
 import { Container } from "./styles";
-import Data from "../../Store/Data";
-import { DataType } from "./types";
 import type { NextRouter } from "next/router";
+import type { EventType } from "../../Types/Events";
 
 interface EventsProps {
+  events: EventType[];
   showFeaturedOnly?: boolean;
 }
 
-const Events: React.FC<EventsProps> = ({ showFeaturedOnly }) => {
+const Events: React.FC<EventsProps> = ({ showFeaturedOnly, events }) => {
   const { push }: NextRouter = useRouter();
   const seachEvents = (year: string, month: string) => {
     push(`/events/${year}/${month}`);
@@ -20,10 +20,10 @@ const Events: React.FC<EventsProps> = ({ showFeaturedOnly }) => {
     <Container>
       <Search onSearch={seachEvents} />
       {!showFeaturedOnly
-        ? Data.map((d: DataType) => <SingleEvent key={d.id} data={d} />)
-        : Data.filter((d: DataType) => d.isFeatured).map((d: DataType) => (
-            <SingleEvent key={d.id} data={d} />
-          ))}
+        ? events?.map((d: EventType) => <SingleEvent key={d.id} data={d} />)
+        : events
+            ?.filter((d: EventType) => d.isFeatured)
+            .map((d: EventType) => <SingleEvent key={d.id} data={d} />)}
     </Container>
   );
 };
