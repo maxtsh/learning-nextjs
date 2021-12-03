@@ -2,10 +2,10 @@ import { Container } from "./styles";
 import Link from "next/link";
 import { MdOutlineDateRange, MdLocationOn } from "react-icons/md";
 import { BsArrowRight } from "react-icons/bs";
-import { DataType } from "../../types";
+import type { EventType } from "../../../../Types/Events";
 
 interface SingleEventProps {
-  data: DataType;
+  data: EventType;
 }
 
 const SingleEvent: React.FC<SingleEventProps> = ({ data }) => {

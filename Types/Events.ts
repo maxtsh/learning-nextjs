@@ -1,4 +1,4 @@
-export interface DataType {
+export interface EventType {
   id: number;
   title: string;
   address: string;
