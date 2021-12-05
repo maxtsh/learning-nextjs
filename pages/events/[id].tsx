@@ -1,3 +1,4 @@
+import Head from "next/head";
 import type {
   GetStaticPropsContext,
   GetStaticPropsResult,
@@ -16,6 +17,10 @@ const Event: NextPage<EventProps> = ({ event }) => {
   if (event) {
     return (
       <Container>
+        <Head>
+          <title>{event.title}</title>
+          <meta name="description" content={event.description} />
+        </Head>
         <div className="intro">
           <h1 className="intro-title">{event?.title}</h1>
         </div>
