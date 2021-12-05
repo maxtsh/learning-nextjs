@@ -4,6 +4,7 @@ import type {
   GetStaticPropsResult,
   NextPage,
 } from "next";
+import Image from "next/image";
 import { BsFillCalendarFill } from "react-icons/bs";
 import { IoLocationSharp } from "react-icons/io5";
 import { Container } from "../../styles/event/styles";
@@ -26,7 +27,12 @@ const Event: NextPage<EventProps> = ({ event }) => {
         </div>
         <div className="box">
           <div className="box-img">
-            <img src={event?.image} alt="event-image" />
+            <Image
+              width={250}
+              height={250}
+              src={event?.image}
+              alt="event-image"
+            />
           </div>
           <div className="box-info">
             <div className="box-info-date">
