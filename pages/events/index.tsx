@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { GetStaticPropsResult, NextPage } from "next";
 import API from "../../api";
 import Events from "../../components/Events";
@@ -9,6 +10,13 @@ interface EventsProps {
 const AllEvents: NextPage<EventsProps> = ({ events }) => {
   return (
     <div className="container">
+      <Head>
+        <title>Browse events</title>
+        <meta
+          name="description"
+          content="Find all the events or search whatever you like!"
+        />
+      </Head>
       <Events events={events} />
     </div>
   );
@@ -22,7 +30,7 @@ export const getStaticProps = async (): Promise<
     "https://nextjs-training-1-default-rtdb.europe-west1.firebasedatabase.app/events.json";
 
   const { data, status } = await API({ url, method: "GET" });
-  events = Object.values(data).map((v: any) => v);
+  events = data ? Object.values(data).map((v: any) => v) : [];
 
   if (status !== 200) {
     return {

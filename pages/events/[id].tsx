@@ -1,8 +1,10 @@
+import Head from "next/head";
 import type {
   GetStaticPropsContext,
   GetStaticPropsResult,
   NextPage,
 } from "next";
+import Image from "next/image";
 import { BsFillCalendarFill } from "react-icons/bs";
 import { IoLocationSharp } from "react-icons/io5";
 import { Container } from "../../styles/event/styles";
@@ -16,12 +18,21 @@ const Event: NextPage<EventProps> = ({ event }) => {
   if (event) {
     return (
       <Container>
+        <Head>
+          <title>{event.title}</title>
+          <meta name="description" content={event.description} />
+        </Head>
         <div className="intro">
           <h1 className="intro-title">{event?.title}</h1>
         </div>
         <div className="box">
           <div className="box-img">
-            <img src={event?.image} alt="event-image" />
+            <Image
+              width={250}
+              height={250}
+              src={event?.image}
+              alt="event-image"
+            />
           </div>
           <div className="box-info">
             <div className="box-info-date">

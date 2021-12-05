@@ -1,4 +1,5 @@
 import { Container } from "./styles";
+import Image from "next/image";
 import Link from "next/link";
 import { MdOutlineDateRange, MdLocationOn } from "react-icons/md";
 import { BsArrowRight } from "react-icons/bs";
@@ -12,7 +13,13 @@ const SingleEvent: React.FC<SingleEventProps> = ({ data }) => {
   return (
     <Container>
       <div className="image">
-        <img className="image-tag" alt="event-image" src={data.image} />
+        <Image
+          width={250}
+          height={267}
+          className="image-tag"
+          alt="event-image"
+          src={data.image}
+        />
       </div>
       <div className="info">
         <h1 className="info-title">{data.title}</h1>

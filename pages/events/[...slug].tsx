@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { useRouter } from "next/router";
 import API from "../../api";
 import SingleEvent from "../../components/Events/components/SingleEvent";
@@ -15,6 +16,20 @@ interface SearchProps {
   noItem?: boolean;
   isLoading?: boolean;
 }
+
+interface PageHeadProps {
+  title: string;
+  content: string;
+}
+
+const PageHead: React.FC<PageHeadProps> = ({ title, content }) => {
+  return (
+    <Head>
+      <title>{title}</title>
+      <meta name="description" content={content} />
+    </Head>
+  );
+};
 
 const Search: NextPage<SearchProps> = ({
   events,
@@ -37,6 +52,14 @@ const Search: NextPage<SearchProps> = ({
   if (hasError) {
     return (
       <div style={{ display: "flex", justifyContent: "center" }}>
+        <PageHead
+          title={`Error found for ${
+            slug && new Date(+slug[0], +slug[1] - 1).toLocaleDateString()
+          }`}
+          content={`All the events for ${
+            slug && new Date(+slug[0], +slug[1] - 1).toLocaleDateString()
+          } date.`}
+        />
         <p style={{ marginTop: "1rem", color: "#666" }}>
           Please enter valid year and month to filter events!
         </p>
@@ -47,6 +70,14 @@ const Search: NextPage<SearchProps> = ({
   if (noItem) {
     return (
       <div style={{ display: "flex", justifyContent: "center" }}>
+        <PageHead
+          title={`No events found for ${
+            slug && new Date(+slug[0], +slug[1] - 1).toLocaleDateString()
+          }`}
+          content={`All the events for ${
+            slug && new Date(+slug[0], +slug[1] - 1).toLocaleDateString()
+          } date.`}
+        />
         <h4 style={{ marginTop: "1rem", color: "#666" }}>
           There are no events available for this filter!
         </h4>
@@ -56,6 +87,14 @@ const Search: NextPage<SearchProps> = ({
 
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
+      <PageHead
+        title={`Events for ${
+          slug && new Date(+slug[0], +slug[1] - 1).toLocaleDateString()
+        }`}
+        content={`All the events for ${
+          slug && new Date(+slug[0], +slug[1] - 1).toLocaleDateString()
+        } date.`}
+      />
       <Container>
         <h2 style={{ marginBlock: "1rem" }}>
           Results for{" "}

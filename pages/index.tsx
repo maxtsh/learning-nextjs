@@ -1,3 +1,4 @@
+import Head from "next/head";
 import Events from "../components/Events";
 import API from "../api";
 import type { NextPage, GetStaticPropsResult } from "next";
@@ -10,6 +11,13 @@ interface HomeProps {
 const Home: NextPage<HomeProps> = ({ events }) => {
   return (
     <div className="container">
+      <Head>
+        <title>Featured events</title>
+        <meta
+          name="description"
+          content="Find all the featured events or search whatever you like!"
+        />
+      </Head>
       <Events events={events} showFeaturedOnly />
     </div>
   );
