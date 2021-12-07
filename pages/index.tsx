@@ -3,6 +3,7 @@ import Events from "../components/Events";
 import API from "../api";
 import type { NextPage, GetStaticPropsResult } from "next";
 import type { EventType } from "../Types/Events";
+import NewsLetter from "components/NewsLetter";
 
 interface HomeProps {
   events: EventType[];
@@ -11,6 +12,7 @@ interface HomeProps {
 const Home: NextPage<HomeProps> = ({ events }) => {
   return (
     <div className="container">
+      <NewsLetter />
       <Head>
         <title>Featured events</title>
         <meta
@@ -31,7 +33,7 @@ export const getStaticProps = async (): Promise<
     "https://nextjs-training-1-default-rtdb.europe-west1.firebasedatabase.app/events.json";
 
   const { data, status } = await API({ url, method: "GET" });
-  events = Object.values(data).map((v: any) => v);
+  events = Object.values(data || []).map((v: any) => v);
 
   if (status !== 200) {
     return {
