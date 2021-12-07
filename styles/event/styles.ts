@@ -76,6 +76,6 @@ export const Container = styled.div`
   .description {
     display: flex;
     justify-content: center;
-    margin-top: 300px;
+    margin-top: 220px;
   }
 `;
