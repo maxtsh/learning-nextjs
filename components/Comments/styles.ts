@@ -76,4 +76,30 @@ export const Container = styled.div`
       cursor: pointer;
     }
   }
+
+  .comments {
+    margin: 0.5rem 0rem;
+    width: 700px;
+    display: flex;
+    flex-direction: column;
+
+    .comment {
+      padding: 0.5rem;
+      border-radius: 4px;
+      margin-top: 0.25rem;
+      background-color: #fff;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+
+      &-header {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      &-message {
+        margin-top: 1rem;
+      }
+    }
+  }
 `;
