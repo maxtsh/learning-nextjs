@@ -10,6 +10,8 @@ import { IoLocationSharp } from "react-icons/io5";
 import { Container } from "../../styles/event/styles";
 import API from "../../api";
 import type { EventType } from "../../Types/Events";
+import Commnets from "components/Comments";
+
 interface EventProps {
   event: EventType;
 }
@@ -28,8 +30,8 @@ const Event: NextPage<EventProps> = ({ event }) => {
         <div className="box">
           <div className="box-img">
             <Image
-              width={250}
-              height={250}
+              width={200}
+              height={200}
               src={event?.image}
               alt="event-image"
             />
@@ -46,6 +48,7 @@ const Event: NextPage<EventProps> = ({ event }) => {
           </div>
         </div>
         <p className="description">{event?.description}</p>
+        <Commnets />
       </Container>
     );
   } else {

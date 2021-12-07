@@ -3,6 +3,7 @@ import Events from "../components/Events";
 import API from "../api";
 import type { NextPage, GetStaticPropsResult } from "next";
 import type { EventType } from "../Types/Events";
+import NewsLetter from "components/NewsLetter";
 
 interface HomeProps {
   events: EventType[];
@@ -11,6 +12,7 @@ interface HomeProps {
 const Home: NextPage<HomeProps> = ({ events }) => {
   return (
     <div className="container">
+      <NewsLetter />
       <Head>
         <title>Featured events</title>
         <meta
