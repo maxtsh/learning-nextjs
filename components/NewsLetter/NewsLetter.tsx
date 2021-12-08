@@ -1,18 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import NotifContext from "store/NotifContext";
 import { Container } from "./styles";
 
 const NewsLetter: React.FC = () => {
   const [form, setForm] = useState<string>("");
+  const { showNotification } = useContext(NotifContext);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    showNotification({
+      status: "pending",
+      message: "Registering for newsletter...",
+      title: "Signingup...",
+    });
     try {
-      await fetch("/api/email", {
+      const res = await fetch("/api/email", {
         method: "POST",
         body: JSON.stringify({ email: form }),
       });
+      const response = await res.json();
+      showNotification({
+        status: "success",
+        message: response?.message || "",
+        title: "Success",
+      });
     } catch (err: any) {
-      console.log(err);
+      showNotification({
+        status: "error",
+        message: "Something went wrong!",
+        title: "ERROR",
+      });
     }
   };
 

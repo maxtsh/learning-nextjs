@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useRouter, NextRouter } from "next/router";
+import NotifContext from "store/NotifContext";
 import { nanoid } from "nanoid";
 import { Container } from "./styles";
 import type { Comment } from "Types/Comments";
@@ -11,6 +12,7 @@ interface Comments {
 }
 
 const Comments: React.FC = () => {
+  const { showNotification } = useContext(NotifContext);
   const { query }: NextRouter = useRouter();
   const eventId = query.id || "";
   const [comments, setComments] = useState<Comments>({
@@ -38,7 +40,7 @@ const Comments: React.FC = () => {
       } catch (err: any) {
         setComments({
           loading: false,
-          error: err.response.message,
+          error: err.message,
           data: null,
         });
       }
@@ -48,16 +50,26 @@ const Comments: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      await fetch("/api/comments", {
+      const res = await fetch("/api/comments", {
         method: "POST",
         body: JSON.stringify(form),
       });
+      const dt = await res.json();
       setComments({
         ...comments,
         data: comments.data ? [...comments.data, form] : [form],
       });
+      showNotification({
+        status: "success",
+        message: dt.message,
+        title: "Success",
+      });
     } catch (err: any) {
-      console.log(err);
+      showNotification({
+        status: "error",
+        message: err.message || "",
+        title: "ERROR",
+      });
     }
   };
 
